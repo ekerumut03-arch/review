@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Değerlendirme</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      padding: 35px 20px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+    }
+
+    #logo {
+      width: 140px;
+      max-height: 140px;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+    }
+
+    .stars {
+      margin-top: 25px;
+    }
+
+    .star {
+      font-size: 42px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: transform 0.15s;
+    }
+
+    .star:hover {
+      transform: scale(1.2);
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="card">
+
+    <img id="logo" src="" alt="İşletme logosu">
+
+    <h1 id="businessName"></h1>
+
+    <p>Deneyiminizi değerlendirin</p>
+
+    <div class="stars">
+      <button class="star" onclick="puanVer(1)">⭐</button>
+      <button class="star" onclick="puanVer(2)">⭐</button>
+      <button class="star" onclick="puanVer(3)">⭐</button>
+      <button class="star" onclick="puanVer(4)">⭐</button>
+      <button class="star" onclick="puanVer(5)">⭐</button>
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const isletmeler = {
+
+      "demo-cafe": {
+        isim: "Demo Cafe",
+        logo: "logo.png"
+      },
+
+      "ikinci-cafe": {
+        isim: "İkinci Cafe",
+        logo: "logo2.png"
+      }
+
+    };
+
+
+    const params = new URLSearchParams(window.location.search);
+
+    const id = params.get("id");
+
+    const isletme = isletmeler[id];
+
+
+    if (!isletme) {
+
+      document.body.innerHTML =
+        "<h2>İşletme bulunamadı.</h2>";
+
+    } else {
+
+      document.getElementById("businessName").textContent =
+        isletme.isim;
+
+      document.getElementById("logo").src =
+        isletme.logo;
+
+    }
+
+
+    function puanVer(puan) {
+
+      if (puan <= 3) {
+
+        window.location.href =
+          "feedback.html?id=" + id + "&rating=" + puan;
+
+      } else {
+
+        window.location.href =
+          "positive.html?id=" + id + "&rating=" + puan;
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
