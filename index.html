@@ -45,16 +45,29 @@
     }
 
     .stars {
-      margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+}
+
+.star {
+    font-size: 42px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .stars {
+        gap: 4px;
     }
 
     .star {
-      font-size: 42px;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      transition: transform 0.15s;
+        font-size: 36px;
     }
+}
 
     .star:hover {
       transform: scale(1.2);
