@@ -1,107 +1,147 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Değerlendirme</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deneyiminizi değerlendirin</title>
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 24px 16px;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      background: #f5efe5;
+      color: #fff8eb;
+      font-family: Arial, sans-serif;
     }
 
     .card {
-      background: white;
-      width: 90%;
-      max-width: 400px;
-      padding: 35px 20px;
-      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 32px 20px;
       text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+      background: #201d1b;
+      border: 1px solid #b88b45;
+      border-radius: 28px;
+      box-shadow: 0 18px 50px #30201026;
     }
 
     #logo {
-      width: 140px;
-      max-height: 140px;
+      display: block;
+      width: 170px;
+      height: 170px;
       object-fit: contain;
-      margin-bottom: 20px;
+      margin: 0 auto 22px;
+    }
+
+    .label {
+      color: #d9b575;
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin: 0 0 12px;
     }
 
     h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
+      margin: 0 0 14px;
+      font-size: 26px;
     }
 
-    p {
-      color: #666;
+    .description {
+      color: #d0c5b7;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
     }
 
     .stars {
-    margin-top: 25px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 6px;
+      margin: 26px 0 12px;
+    }
 
-.star {
-    -webkit-appearance: none;
-    appearance: none;
-    font-family: Arial, sans-serif;
-    font-size: 32px;
-    line-height: 1;
-    cursor: pointer;
-    border: 0;
-    background: none;
-    padding: 0 3px;
-    margin: 0;
-    width: auto;
-    min-width: 0;
-    flex: 0 0 auto;
-}
+    .star {
+      appearance: none;
+      -webkit-appearance: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 52px;
+      padding: 5px;
+      border: 1px solid #ffffff18;
+      border-radius: 12px;
+      background: #ffffff08;
+      color: #e5b75e;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
 
-.star:hover {
-    transform: scale(1.2);
-}
+    .star svg {
+      width: 34px;
+      height: 34px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .star:hover,
+    .star:focus-visible {
+      background: #71303b;
+      outline: 2px solid #e5b75e;
+      outline-offset: 2px;
+    }
+
+    .hint {
+      color: #bdb0a0;
+      font-size: 12px;
+      margin: 0;
+    }
+
+    footer {
+      border-top: 1px solid #ffffff18;
+      margin-top: 28px;
+      padding-top: 20px;
+      color: #c9bba7;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    [hidden] { display: none !important; }
   </style>
-
 </head>
 
 <body>
+  <main class="card">
+    <img id="logo" alt="İşletme logosu" hidden>
 
-  <div class="card">
+    <p class="label">GÖRÜŞLERİNİZ DEĞERLİ</p>
+    <h1 id="businessName">İşletme bulunamadı</h1>
 
-    <img id="logo" src="" alt="İşletme logosu">
+    <div id="ratingArea" hidden>
+      <p class="description">
+        Deneyiminizi nasıl değerlendirirsiniz?
+      </p>
 
-    <h1 id="businessName"></h1>
+      <div class="stars" id="stars"
+           role="group" aria-label="Puanınızı seçin"></div>
 
-    <p>Deneyiminizi değerlendirin</p>
+      <p class="hint">Puan vermek için bir yıldıza dokunun.</p>
 
-    <div class="stars">
-      <button class="star" onclick="puanVer(1)">⭐</button>
-      <button class="star" onclick="puanVer(2)">⭐</button>
-      <button class="star" onclick="puanVer(3)">⭐</button>
-      <button class="star" onclick="puanVer(4)">⭐</button>
-      <button class="star" onclick="puanVer(5)">⭐</button>
+      <footer>
+        Bizi tercih ettiğiniz için teşekkür ederiz.
+      </footer>
     </div>
-
-  </div>
-
+  </main>
 
   <script>
-
     const isletmeler = {
-
       "demo-cafe": {
         isim: "Demo Cafe",
         logo: "nfc_dijital_cozum_logo.png"
@@ -110,51 +150,69 @@
       "ikinci-cafe": {
         isim: "İkinci Cafe",
         logo: "logo2.png"
-      }
+      },
 
+      "bilgin-pide": {
+        isim: "Bilgin Pide",
+        logo: "bilgin-pide-logo.png",
+        googleYorum:
+          "https://search.google.com/local/writereview?placeid=ChIJwUcmzdtA0xQRWxXCxLKHiJY"
+      }
     };
 
-
     const params = new URLSearchParams(window.location.search);
+    const gelenId = params.get("id");
 
-    const id = params.get("id");
+    // Eski demo bağlantısının iki yazımını da destekler.
+    const id = gelenId === "demo_cafe" ? "demo-cafe" : gelenId;
+    const isletme = Object.prototype.hasOwnProperty.call(isletmeler, id)
+      ? isletmeler[id]
+      : null;
 
-    const isletme = isletmeler[id];
+    if (isletme) {
+      document.title = isletme.isim + " | Değerlendirme";
+      document.getElementById("businessName").textContent = isletme.isim;
 
+      const logo = document.getElementById("logo");
+      logo.src = isletme.logo;
+      logo.alt = isletme.isim + " logosu";
+      logo.hidden = false;
+      logo.onerror = () => { logo.hidden = true; };
 
-    if (!isletme) {
+      document.getElementById("ratingArea").hidden = false;
 
-      document.body.innerHTML =
-        "<h2>İşletme bulunamadı.</h2>";
-
-    } else {
-
-      document.getElementById("businessName").textContent =
-        isletme.isim;
-
-      document.getElementById("logo").src =
-        isletme.logo;
-
+      for (let puan = 1; puan <= 5; puan++) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "star";
+        button.setAttribute("aria-label", puan + " yıldız");
+        button.innerHTML = `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87
+                     1.18 6.88L12 17.77l-6.18 3.25L7 14.14
+                     2 9.27l6.91-1.01L12 2z"/>
+          </svg>`;
+        button.addEventListener("click", () => puanVer(puan));
+        document.getElementById("stars").appendChild(button);
+      }
     }
-
 
     function puanVer(puan) {
+      if (!isletme) return;
+
+      const query = new URLSearchParams({
+        id: id,
+        rating: String(puan)
+      });
 
       if (puan <= 3) {
-
-        window.location.href =
-          "feedback.html?id=" + id + "&rating=" + puan;
-
+        window.location.href = "feedback.html?" + query;
+      } else if (isletme.googleYorum) {
+        window.location.href = isletme.googleYorum;
       } else {
-
-        window.location.href =
-          "positive.html?id=" + id + "&rating=" + puan;
-
+        window.location.href = "positive.html?" + query;
       }
-
     }
-
   </script>
-
 </body>
 </html>
